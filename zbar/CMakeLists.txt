@@ -36,7 +36,6 @@ set(HEADERS_CONFIG
 
 add_library(${LCONFIG} STATIC ${SOURCES_CONFIG} ${HEADERS_CONFIG})
 add_library(${LZBAR} SHARED ${SOURCES} ${HEADERS})
-add_library("${LZBAR}-static" STATIC ${SOURCES} ${HEADERS})
 
 set(C_HEADERS "")
 set(CXX_HEADERS "")
@@ -45,6 +44,12 @@ if(UNIX)
     set(C_HEADERS "/usr/include")
     set(CXX_HEADERS "/usr/include/c++/${CMAKE_CXX_COMPILER_VERSION}")
 endif(UNIX)
+
+if(WIN32)
+    message(STATUS ${CMAKE_GENERATOR_PLATFORM})
+    set(C_HEADERS "C:/Program Files (x86)/Windows Kits/10/Include")
+    set(CXX_HEADERS "")
+endif(WIN32)
 
 find_file(HAVE_DLFCN_F               "dlfcn.h" "${C_HEADERS}")
 find_file(HAVE_FCNTL_F               "fcntl.h" "${C_HEADERS}")
@@ -163,7 +168,10 @@ foreach(CONFIG_OPT
     
 endforeach()
 
-target_link_libraries(${LZBAR} ${LQRCODE} ${LDECODER} ${LCONFIG})
-target_link_libraries("${LZBAR}-static" ${LQRCODE} ${LDECODER} ${LCONFIG})
+if(UNIX)
+    target_link_libraries(${LZBAR} ${LQRCODE} ${LDECODER} ${LCONFIG})
+elseif(WIN32)
+    target_link_libraries(${LZBAR} ${LQRCODE} ${LDECODER} ${LCONFIG} ${LIOCONV})
+endif()
 
 install(TARGETS ${LZBAR} DESTINATION ${CMAKE_INSTALL_PREFIX})

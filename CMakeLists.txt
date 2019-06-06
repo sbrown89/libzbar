@@ -39,10 +39,22 @@ include_directories("${PROJECT_SOURCE_DIR}/zbar")
 
 set(ZBAR_MAIN   "${PROJECT_SOURCE_DIR}/include/zbar.h")
 
+set(LIOCONV     "")
 set(LCONFIG     "lconfig")
 set(LDECODER    "ldecoder")
 set(LQRCODE     "lqrcode")
 set(LZBAR       "lzbar")
+
+if(WIN32)
+    include_directories("${PROJECT_SOURCE_DIR}/zbar/libiconv/Include")
+    
+    if(${CMAKE_GENERATOR_PLATFORM} STREQUAL "x64")
+        set(LIOCONV "${PROJECT_SOURCE_DIR}/zbar/libiconv/lib_x64/libiconv.lib")
+    else()
+        set(LIOCONV "${PROJECT_SOURCE_DIR}/zbar/libiconv/lib_win32/libiconv.lib")
+    endif()
+    
+endif(WIN32)
 
 add_subdirectory("zbar")
 
