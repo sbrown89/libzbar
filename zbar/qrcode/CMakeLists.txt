@@ -19,3 +19,4 @@ set(HEADERS
 )
 
 add_library(${LQRCODE} STATIC ${SOURCES} ${HEADERS})
+target_link_libraries(${LQRCODE} ${LCONFIG})

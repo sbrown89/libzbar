@@ -19,3 +19,4 @@ set(HEADERS
 )
 
 add_library(${LDECODER} STATIC ${SOURCES} ${HEADERS})
+target_link_libraries(${LDECODER} ${LCONFIG})

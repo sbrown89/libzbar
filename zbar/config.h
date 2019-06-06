@@ -26,13 +26,25 @@
 #undef HAVE_ATEXIT
 
 /* Define to 1 if you have the <dlfcn.h> header file. */
-#undef HAVE_DLFCN_H
+#ifdef HAVE_DLFCN
+    #define HAVE_DLFCN_H 1
+#else
+    #undef HAVE_DLFCN_H
+#endif
 
 /* Define to 1 if you have the <fcntl.h> header file. */
-#undef HAVE_FCNTL_H
+#ifdef HAVE_FCNTL
+    #define HAVE_FCNTL_H 1
+#else
+    #undef HAVE_FCNTL_H
+#endif
 
 /* Define to 1 if you have the <features.h> header file. */
-#undef HAVE_FEATURES_H
+#ifdef HAVE_FEATURES
+    #define HAVE_FEATURES_H 1
+#else
+    #undef HAVE_FEATURES_H
+#endif
 
 /* Define to 1 if you have the `getpagesize' function. */
 #undef HAVE_GETPAGESIZE
@@ -41,10 +53,18 @@
 #define HAVE_ICONV 1
 
 /* Define to 1 if you have the <inttypes.h> header file. */
-#undef HAVE_INTTYPES_H
+#ifdef HAVE_INTTYPES
+    #define HAVE_INTTYPES_H 1
+#else
+    #undef HAVE_INTTYPES_H
+#endif
 
 /* Define to 1 if you have the <jpeglib.h> header file. */
-#undef HAVE_JPEGLIB_H
+#ifdef HAVE_JPEGLIB
+    #define HAVE_JPEGLIB_H 1
+#else
+    #undef HAVE_JPEGLIB_H
+#endif
 
 /* Define to 1 if you have the `jpeg' library (-ljpeg). */
 #undef HAVE_LIBJPEG
@@ -53,13 +73,25 @@
 #undef HAVE_LIBPTHREAD
 
 /* Define to 1 if you have the <linux/videodev2.h> header file. */
-#undef HAVE_LINUX_VIDEODEV2_H
+#ifdef HAVE_VIDEODEV2
+    #define HAVE_LINUX_VIDEODEV2_H
+#else
+    #undef HAVE_LINUX_VIDEODEV2_H
+#endif
 
 /* Define to 1 if you have the <linux/videodev.h> header file. */
-#undef HAVE_LINUX_VIDEODEV_H
+#ifdef HAVE_VIDEODEV
+    #define HAVE_LINUX_VIDEODEV_H 1
+#else
+    #undef HAVE_LINUX_VIDEODEV_H
+#endif
 
 /* Define to 1 if you have the <memory.h> header file. */
-#undef HAVE_MEMORY_H
+#ifdef HAVE_MEMORY
+    #define HAVE_MEMORY_H 1
+#else
+    #undef HAVE_MEMORY_H
+#endif
 
 /* Define to 1 if you have the `memset' function. */
 #undef HAVE_MEMSET
@@ -68,64 +100,136 @@
 #undef HAVE_MMAP
 
 /* Define to 1 if you have the <poll.h> header file. */
-#undef HAVE_POLL_H
+#ifdef HAVE_POLL
+    #define HAVE_POLL_H 1
+#else
+    #undef HAVE_POLL_H
+#endif
 
 /* Define to 1 if you have the <pthread.h> header file. */
-#undef HAVE_PTHREAD_H
+#ifdef HAVE_PTHREAD
+    #define HAVE_PTHREAD_H 1
+#else
+    #undef HAVE_PTHREAD_H
+#endif
 
 /* Define to 1 if you have the `setenv' function. */
 #undef HAVE_SETENV
 
 /* Define to 1 if you have the <stdint.h> header file. */
-#undef HAVE_STDINT_H
+#ifdef HAVE_STDINT
+    #define HAVE_STDINT_H 1
+#else
+    #undef HAVE_STDINT_H
+#endif
 
 /* Define to 1 if you have the <stdlib.h> header file. */
-#undef HAVE_STDLIB_H
+#ifdef HAVE_STDLIB
+    #define HAVE_STDLIB_H 1
+#else
+    #undef HAVE_STDLIB_H
+#endif
 
 /* Define to 1 if you have the <strings.h> header file. */
-#undef HAVE_STRINGS_H
+#ifdef HAVE_STRINGS
+    #define HAVE_STRINGS_H 1
+#else
+    #undef HAVE_STRINGS_H
+#endif
 
 /* Define to 1 if you have the <string.h> header file. */
-#undef HAVE_STRING_H
+#ifdef HAVE_STRING
+    #define HAVE_STRING_H 1
+#else
+    #undef HAVE_STRING_H
+#endif
 
 /* Define to 1 if you have the <sys/ioctl.h> header file. */
-#undef HAVE_SYS_IOCTL_H
+#ifdef HAVE_IOCTL
+    #define HAVE_SYS_IOCTL_H 1
+#else
+    #undef HAVE_SYS_IOCTL_H
+#endif
 
 /* Define to 1 if you have the <sys/ipc.h> header file. */
-#undef HAVE_SYS_IPC_H
+#ifdef HAVE_IPC
+    #define HAVE_SYS_IPC_H 1
+#else
+    #undef HAVE_SYS_IPC_H
+#endif
 
 /* Define to 1 if you have the <sys/mman.h> header file. */
-#undef HAVE_SYS_MMAN_H
+#ifdef HAVE_MMAN
+    #define HAVE_SYS_MMAN_H 1
+#else
+    #undef HAVE_SYS_MMAN_H
+#endif
 
 /* Define to 1 if you have the <sys/shm.h> header file. */
-#undef HAVE_SYS_SHM_H
+#ifdef HAVE_SHM
+    #define HAVE_SYS_SHM_H
+#else
+    #undef HAVE_SYS_SHM_H
+#endif
 
 /* Define to 1 if you have the <sys/stat.h> header file. */
-#undef HAVE_SYS_STAT_H
+#ifdef HAVE_STAT
+    #define HAVE_SYS_STAT_H 1
+#else
+    #undef HAVE_SYS_STAT_H
+#endif
 
 /* Define to 1 if you have the <sys/times.h> header file. */
-#undef HAVE_SYS_TIMES_H
+#ifdef HAVE_TIMES
+    #define HAVE_SYS_TIMES_H 1
+#else
+    #undef HAVE_SYS_TIMES_H
+#endif
 
 /* Define to 1 if you have the <sys/time.h> header file. */
-#undef HAVE_SYS_TIME_H
+#ifdef HAVE_TIME
+    #define HAVE_SYS_TIME_H 1
+#else
+    #undef HAVE_SYS_TIME_H
+#endif
 
 /* Define to 1 if you have the <sys/types.h> header file. */
-#undef HAVE_SYS_TYPES_H
+#ifdef HAVE_TYPES
+    #define HAVE_SYS_TYPES_H 1
+#else
+    #undef HAVE_SYS_TYPES_H
+#endif
 
 /* Define to 1 if the system has the type `uintptr_t'. */
 #undef HAVE_UINTPTR_T
 
 /* Define to 1 if you have the <unistd.h> header file. */
-#undef HAVE_UNISTD_H
+#ifdef HAVE_UNISTD
+    #define HAVE_UNISTD_H 1
+#else
+    #undef HAVE_UNISTD_H
+#endif
 
 /* Define to 1 if you have the <vfw.h> header file. */
-#undef HAVE_VFW_H
+#ifdef HAVE_VFW
+    #define HAVE_VFW_H 1
+#else
+    #undef HAVE_VFW_H
+#endif
 
 /* Define to 1 if you have the <X11/extensions/XShm.h> header file. */
-#undef HAVE_X11_EXTENSIONS_XSHM_H
+#ifdef HAVE_XSHM
+    #define HAVE_X11_EXTENSIONS_XSHM_H 1
+#else
+    #undef HAVE_X11_EXTENSIONS_XSHM_H
+#endif
 
 /* Define to 1 if you have the <X11/extensions/Xvlib.h> header file. */
-#undef HAVE_X11_EXTENSIONS_XVLIB_H
+#ifdef HAVE_XVLIB
+    #define HAVE_X11_EXTENSIONS_XVLIB_H 1
+#else
+    #undef HAVE_X11_EXTENSIONS_XVLIB_H
+#endif
 
 /* Define as const if the declaration of iconv() needs const. */
 #undef ICONV_CONST
@@ -168,7 +272,7 @@
 #define PACKAGE_VERSION 1
 
 /* Define to 1 if you have the ANSI C header files. */
-#undef STDC_HEADERS
+#define STDC_HEADERS 1
 
 /* Version number of package */
 #undef VERSION
@@ -226,4 +330,3 @@
 #ifndef X_DISPLAY_MISSING
 # define HAVE_X
 #endif
-
