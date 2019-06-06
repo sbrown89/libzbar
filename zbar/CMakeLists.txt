@@ -14,6 +14,7 @@ set(SOURCES
 )
 
 set(HEADERS
+    ${ZBAR_MAIN}
     debug.h
     decoder.h
     error.h
@@ -166,6 +167,3 @@ target_link_libraries(${LZBAR} ${LQRCODE} ${LDECODER} ${LCONFIG})
 target_link_libraries("${LZBAR}-static" ${LQRCODE} ${LDECODER} ${LCONFIG})
 
 install(TARGETS ${LZBAR} DESTINATION ${CMAKE_INSTALL_PREFIX})
-install(TARGETS "${LZBAR}-static" DESTINATION ${CMAKE_INSTALL_PREFIX})
-
-# target_link_libraries(${lib} "-Wl,-strip-all,--gc-sections")

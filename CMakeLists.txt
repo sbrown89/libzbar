@@ -37,6 +37,8 @@ include_directories("${PROJECT_SOURCE_DIR}/zbar/decoder")
 include_directories("${PROJECT_SOURCE_DIR}/zbar/qrcode")
 include_directories("${PROJECT_SOURCE_DIR}/zbar")
 
+set(ZBAR_MAIN   "${PROJECT_SOURCE_DIR}/include/zbar.h")
+
 set(LCONFIG     "lconfig")
 set(LDECODER    "ldecoder")
 set(LQRCODE     "lqrcode")

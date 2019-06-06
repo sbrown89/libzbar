@@ -9,6 +9,7 @@ set(SOURCES
 )
 
 set(HEADERS
+    ${ZBAR_MAIN}
     code128.h
     code39.h
     ean.h

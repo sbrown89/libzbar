@@ -10,6 +10,7 @@ set(SOURCES
 )
 
 set(HEADERS
+    ${ZBAR_MAIN}
     bch15_5.h
     binarize.h
     isaac.h
