@@ -20,5 +20,7 @@ msbuild.exe INSTALL.vcxproj <br />
 ## Suggested use, NOT ACTUAL  LEGAL ADVICE
 On windows this will statically build and link the libiconv library.
 For non-opensource / proprietary code, by dynamically linking to the final lib (libzbar), you will remain LGPL compliant. This, the original ZBar codebase and libiconv are released under the LGPL license.<br />
+<br />
+You should review the LGPL legal doc if unsure of use.
 
 
