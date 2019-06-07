@@ -1,23 +1,18 @@
 cmake_minimum_required(VERSION 3.3)
-project("ZBar" VERSION 1.0.0 DESCRIPTION "ZBar cmake port")
-set(CMAKE_INSTALL_PREFIX "${PROJECT_SOURCE_DIR}/bin")
+project("libzbar" VERSION 0.11.0 DESCRIPTION "Complete cross-platform ZBar cmake port")
+if(NOT CMAKE_INSTALL_PREFIX)
+    set(CMAKE_INSTALL_PREFIX "${PROJECT_SOURCE_DIR}/bin")
+endif()
+
 set(CMAKE_VERBOSE_MAKEFILE OFF)
 set(CMAKE_CONFIGURATION_TYPES "Debug;Release")
-set(CMAKE_CXX_STANDARD 11)
-set(CMAKE_CXX_FLAGS_RELEASE "-O3 -fPIC")
-set(CMAKE_C_FLAGS_RELEASE "-O3 -fPIC")
-set(CMAKE_CXX_FLAGS_DEBUG "-Og -fPIC")
-set(CMAKE_C_FLAGS_DEBUG "-Og -fPIC")
-set(CXX_VER "-std=c++11")
 
-if(CMAKE_CXX_STANDARD EQUAL 11)
-    set(CXX_VER "-std=c++11")
-elseif(CMAKE_CXX_STANDARD EQUAL 14)
-    set(CXX_VER "-std=c++14")
-elseif(CMAKE_CXX_STANDARD EQUAL 17)
-    set(CXX_VER "-std=c++17")
-else()
-    set(CXX_VER "-std=c++11")
+if(WIN32)
+    set(CMAKE_C_FLAGS_RELEASE "/O2 /TC")
+    set(CMAKE_C_FLAGS_DEBUG "/Zi /TC")
+elseif(UNIX)
+    set(CMAKE_C_FLAGS_RELEASE "-O3 -fPIC")
+    set(CMAKE_C_FLAGS_DEBUG "-Og -fPIC")
 endif()
 
 if(NOT CMAKE_BUILD_TYPE)
@@ -25,10 +20,8 @@ if(NOT CMAKE_BUILD_TYPE)
 endif()
 
 if(CMAKE_BUILD_TYPE STREQUAL "Release")
-    set(CMAKE_CXX_FLAGS "${CXX_VER} ${CMAKE_CXX_FLAGS_RELEASE}")
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS_RELEASE}")
 elseif(CMAKE_BUILD_TYPE STREQUAL "Debug")
-    set(CMAKE_CXX_FLAGS "${CXX_VER} ${CMAKE_CXX_FLAGS_DEBUG}")
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS_DEBUG}")
 endif()
 
@@ -36,28 +29,19 @@ include_directories("${PROJECT_SOURCE_DIR}/include")
 include_directories("${PROJECT_SOURCE_DIR}/zbar/decoder")
 include_directories("${PROJECT_SOURCE_DIR}/zbar/qrcode")
 include_directories("${PROJECT_SOURCE_DIR}/zbar")
-
 set(ZBAR_MAIN   "${PROJECT_SOURCE_DIR}/include/zbar.h")
 
-set(LIOCONV     "")
+set(LIOCONV     "lioconv-win")
 set(LCONFIG     "lconfig")
 set(LDECODER    "ldecoder")
 set(LQRCODE     "lqrcode")
-set(LZBAR       "lzbar")
+set(LZBAR       "libzbar")
 
 if(WIN32)
-    include_directories("${PROJECT_SOURCE_DIR}/zbar/libiconv/Include")
-    
-    if(${CMAKE_GENERATOR_PLATFORM} STREQUAL "x64")
-        set(LIOCONV "${PROJECT_SOURCE_DIR}/zbar/libiconv/lib_x64/libiconv.lib")
-    else()
-        set(LIOCONV "${PROJECT_SOURCE_DIR}/zbar/libiconv/lib_win32/libiconv.lib")
-    endif()
-    
+    include_directories("${PROJECT_SOURCE_DIR}/zbar/libiconv-win/include")
 endif(WIN32)
 
 add_subdirectory("zbar")
-
 set(PUBLIC_HEADERS
     "${PROJECT_SOURCE_DIR}/include/zbar.h"
 )
@@ -79,4 +63,3 @@ set(NON_PUBLIC_HEADERS
 
 install(FILES ${PUBLIC_HEADERS} DESTINATION "${CMAKE_INSTALL_PREFIX}/include")
 install(FILES ${NON_PUBLIC_HEADERS} DESTINATION "${CMAKE_INSTALL_PREFIX}/include/zbar")
-

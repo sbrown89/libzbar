@@ -20,4 +20,10 @@ set(HEADERS
 )
 
 add_library(${LQRCODE} STATIC ${SOURCES} ${HEADERS})
-target_link_libraries(${LQRCODE} ${LCONFIG})
+
+if(UNIX)
+    target_link_libraries(${LQRCODE} ${LCONFIG})
+elseif(WIN32)
+    target_link_libraries(${LQRCODE} ${LCONFIG} ${LIOCONV})
+    target_compile_definitions(${LQRCODE} PUBLIC LIB_ZBAR_BUILD)
+endif()

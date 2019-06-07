@@ -6,7 +6,9 @@
 #include <stdlib.h>
 #include <limits.h>
 #include <string.h>
-#include <time.h>
+#ifdef __linux__
+    #include <time.h>
+#endif
 #include "qrcode.h"
 #include "qrdec.h"
 #include "bch15_5.h"

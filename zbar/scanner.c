@@ -24,6 +24,7 @@
 #include <config.h>
 #include <stdlib.h>     /* malloc, free, abs */
 #include <string.h>     /* memset */
+#include <stddef.h>
 
 #include <zbar.h>
 #include "svg.h"
@@ -91,7 +92,7 @@ void zbar_scanner_destroy (zbar_scanner_t *scn)
 
 zbar_symbol_type_t zbar_scanner_reset (zbar_scanner_t *scn)
 {
-    memset(&scn->x, 0, sizeof(zbar_scanner_t) + (void*)scn - (void*)&scn->x);
+    memset(&scn->x, 0, sizeof(zbar_scanner_t) - offsetof(zbar_scanner_t, x));
     scn->y1_thresh = scn->y1_min_thresh;
     if(scn->decoder)
         zbar_decoder_reset(scn->decoder);
@@ -203,7 +204,7 @@ zbar_symbol_type_t zbar_scanner_new_scan (zbar_scanner_t *scn)
     }
 
     /* reset scanner and associated decoder */
-    memset(&scn->x, 0, sizeof(zbar_scanner_t) + (void*)scn - (void*)&scn->x);
+    memset(&scn->x, 0, sizeof(zbar_scanner_t) - offsetof(zbar_scanner_t, x));
     scn->y1_thresh = scn->y1_min_thresh;
     if(scn->decoder)
         zbar_decoder_new_scan(scn->decoder);

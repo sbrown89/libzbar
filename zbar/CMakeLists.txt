@@ -26,6 +26,13 @@ set(HEADERS
     symbol.h
 )
 
+if(WIN32)
+    set(HEADERS
+        ${HEADERS}
+        unistd.h
+    )
+endif(WIN32)
+
 set(SOURCES_CONFIG
     config.c
 )
@@ -34,21 +41,25 @@ set(HEADERS_CONFIG
     config.h
 )
 
+if(WIN32)
+    add_subdirectory("libiconv-win")
+endif(WIN32)
+
 add_library(${LCONFIG} STATIC ${SOURCES_CONFIG} ${HEADERS_CONFIG})
 add_library(${LZBAR} SHARED ${SOURCES} ${HEADERS})
 
 set(C_HEADERS "")
-set(CXX_HEADERS "")
-
 if(UNIX)
     set(C_HEADERS "/usr/include")
-    set(CXX_HEADERS "/usr/include/c++/${CMAKE_CXX_COMPILER_VERSION}")
 endif(UNIX)
 
 if(WIN32)
-    message(STATUS ${CMAKE_GENERATOR_PLATFORM})
-    set(C_HEADERS "C:/Program Files (x86)/Windows Kits/10/Include")
-    set(CXX_HEADERS "")
+    file(TO_CMAKE_PATH "$ENV{ProgramFiles}" _progFilePath)
+    include_directories("${_progFilePath}/Windows Kits/10/Include/${CMAKE_VS_WINDOWS_TARGET_PLATFORM_VERSION}/ucrt")
+    set(C_HEADERS "${_progFilePath}/Windows Kits/10/Include/${CMAKE_VS_WINDOWS_TARGET_PLATFORM_VERSION}/ucrt")
+    
+    target_compile_definitions(${LCONFIG} PUBLIC LIB_ZBAR_BUILD)
+    target_compile_definitions(${LZBAR} PUBLIC LIB_ZBAR_BUILD)
 endif(WIN32)
 
 find_file(HAVE_DLFCN_F               "dlfcn.h" "${C_HEADERS}")
@@ -77,6 +88,10 @@ find_file(HAVE_UNISTD_F              "unistd.h" "${C_HEADERS}")
 find_file(HAVE_VFW_F                 "vfw.h" "${C_HEADERS}")
 find_file(HAVE_XSHM_F                "X11/extensions/XShm.h" "${C_HEADERS}")
 find_file(HAVE_XVLIB_F               "X11/extensions/Xvlib.h" "${C_HEADERS}")
+
+if(WIN32)
+    find_file(HAVE_UNISTD_F              "unistd.h" "${PROJECT_SOURCE_DIR}/zbar")
+endif(WIN32)
 
 foreach(CONFIG_OPT
     ${HAVE_DLFCN_F}
@@ -168,10 +183,22 @@ foreach(CONFIG_OPT
     
 endforeach()
 
-if(UNIX)
-    target_link_libraries(${LZBAR} ${LQRCODE} ${LDECODER} ${LCONFIG})
-elseif(WIN32)
-    target_link_libraries(${LZBAR} ${LQRCODE} ${LDECODER} ${LCONFIG} ${LIOCONV})
-endif()
+target_link_libraries(${LZBAR} ${LQRCODE} ${LDECODER} ${LCONFIG})
 
-install(TARGETS ${LZBAR} DESTINATION ${CMAKE_INSTALL_PREFIX})
+if(WIN32)
+    if(${CMAKE_GENERATOR_PLATFORM} STREQUAL "x64")
+        install(TARGETS ${LZBAR}    LIBRARY DESTINATION "${CMAKE_INSTALL_PREFIX}/x64"
+                                    ARCHIVE DESTINATION "${CMAKE_INSTALL_PREFIX}/x64"
+                                    RUNTIME DESTINATION "${CMAKE_INSTALL_PREFIX}/bin"
+                                    COMPONENT library
+        )
+    else()
+        install(TARGETS ${LZBAR}    LIBRARY DESTINATION "${CMAKE_INSTALL_PREFIX}/win32"
+                                    ARCHIVE DESTINATION "${CMAKE_INSTALL_PREFIX}/win32"
+                                    RUNTIME DESTINATION "${CMAKE_INSTALL_PREFIX}/bin"
+                                    COMPONENT library
+        )
+    endif()
+else()
+    install(TARGETS ${LZBAR} DESTINATION ${CMAKE_INSTALL_PREFIX})
+endif()

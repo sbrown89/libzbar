@@ -20,4 +20,8 @@ set(HEADERS
 )
 
 add_library(${LDECODER} STATIC ${SOURCES} ${HEADERS})
+if(WIN32)
+    target_compile_definitions(${LDECODER} PUBLIC LIB_ZBAR_BUILD)
+endif(WIN32)
+
 target_link_libraries(${LDECODER} ${LCONFIG})

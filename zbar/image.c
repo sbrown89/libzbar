@@ -203,7 +203,7 @@ int zbar_image_write (const zbar_image_t *img,
                       const char *filebase)
 {
     int len = strlen(filebase) + 16;
-    char filename[len];
+    char *filename = (char *)malloc(len);
     strcpy(filename, filebase);
     int n = 0;
     if(*(char*)&img->format >= ' ')
@@ -222,6 +222,7 @@ int zbar_image_write (const zbar_image_t *img,
     if(!f) {
         int rc = errno;
         zprintf(1, "ERROR opening %s: %s\n", filename, strerror(rc));
+        free(filename);
         return(rc);
     }
 
@@ -239,6 +240,7 @@ int zbar_image_write (const zbar_image_t *img,
         fclose(f);
         return(rc);
     }
+    free(filename);
     return(fclose(f));
 }
 

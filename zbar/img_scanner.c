@@ -27,8 +27,10 @@
 # include <inttypes.h>
 #endif
 #include <stdlib.h>     /* malloc, free */
-#include <time.h>       /* clock_gettime */
-#include <sys/time.h>   /* gettimeofday */
+#ifdef __linux__
+    #include <time.h>       /* clock_gettime */
+    #include <sys/time.h>   /* gettimeofday */
+#endif
 #include <string.h>     /* memcmp, memset, memcpy */
 #include <assert.h>
 
@@ -600,14 +602,16 @@ int zbar_scan_image (zbar_image_scanner_t *iscn,
     /* timestamp image
      * FIXME prefer video timestamp
      */
-#if _POSIX_TIMERS > 0
-    struct timespec abstime;
-    clock_gettime(CLOCK_REALTIME, &abstime);
-    iscn->time = (abstime.tv_sec * 1000) + ((abstime.tv_nsec / 500000) + 1) / 2;
-#else
-    struct timeval abstime;
-    gettimeofday(&abstime, NULL);
-    iscn->time = (abstime.tv_sec * 1000) + ((abstime.tv_usec / 500) + 1) / 2;
+#ifdef __linux__
+    #if _POSIX_TIMERS > 0
+        struct timespec abstime;
+        clock_gettime(CLOCK_REALTIME, &abstime);
+        iscn->time = (abstime.tv_sec * 1000) + ((abstime.tv_nsec / 500000) + 1) / 2;
+    #else
+        struct timeval abstime;
+        gettimeofday(&abstime, NULL);
+        iscn->time = (abstime.tv_sec * 1000) + ((abstime.tv_usec / 500) + 1) / 2;
+    #endif
 #endif
 
 #ifdef ENABLE_QRCODE
