@@ -29,7 +29,7 @@ set(HEADERS
 if(WIN32)
     set(HEADERS
         ${HEADERS}
-        unistd.h
+        "./win-include/unistd.h"
     )
 endif(WIN32)
 
@@ -56,6 +56,7 @@ endif(UNIX)
 if(WIN32)
     file(TO_CMAKE_PATH "$ENV{ProgramFiles}" _progFilePath)
     include_directories("${_progFilePath}/Windows Kits/10/Include/${CMAKE_VS_WINDOWS_TARGET_PLATFORM_VERSION}/ucrt")
+    include_directories("${PROJECT_SOURCE_DIR}/zbar/win-include")
     set(C_HEADERS "${_progFilePath}/Windows Kits/10/Include/${CMAKE_VS_WINDOWS_TARGET_PLATFORM_VERSION}/ucrt")
     
     target_compile_definitions(${LCONFIG} PUBLIC LIB_ZBAR_BUILD)
@@ -90,7 +91,7 @@ find_file(HAVE_XSHM_F                "X11/extensions/XShm.h" "${C_HEADERS}")
 find_file(HAVE_XVLIB_F               "X11/extensions/Xvlib.h" "${C_HEADERS}")
 
 if(WIN32)
-    find_file(HAVE_UNISTD_F              "unistd.h" "${PROJECT_SOURCE_DIR}/zbar")
+    find_file(HAVE_UNISTD_F              "unistd.h" "${PROJECT_SOURCE_DIR}/zbar/win-include")
 endif(WIN32)
 
 foreach(CONFIG_OPT
