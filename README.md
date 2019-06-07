@@ -1,6 +1,8 @@
 # libzbar
 Complete Cross-Platform ZBar port <br />
 Uses CMake as the build system <br />
+<br />
+I have removed/moved files that don’t directly contribute to the locating and decoding of barcodes/qrcodes. They are located in the directory notused. If you would like their functionality .. then add them to the compilation yourself. :wink:
 
 # Linux
 mkdir build; <br />
@@ -24,3 +26,6 @@ For non-opensource / proprietary code, by dynamically linking to the final lib (
 You should review the LGPL legal doc if unsure of use.
 
 
+## Original Sources
+[zbar.sourceforge.net](http://zbar.sourceforge.net/)<br />
+[libiconv](https://www.gnu.org/software/libiconv/)
