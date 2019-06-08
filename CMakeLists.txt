@@ -6,6 +6,9 @@ endif()
 
 set(CMAKE_VERBOSE_MAKEFILE OFF)
 set(CMAKE_CONFIGURATION_TYPES "Debug;Release")
+if(NOT CMAKE_BUILD_TYPE)
+    set(CMAKE_BUILD_TYPE "Release")
+endif()
 
 if(WIN32)
     set(CMAKE_C_FLAGS_RELEASE "/O2 /TC")
@@ -15,15 +18,17 @@ elseif(UNIX)
     set(CMAKE_C_FLAGS_DEBUG "-Og -fPIC")
 endif()
 
-if(NOT CMAKE_BUILD_TYPE)
-    set(CMAKE_BUILD_TYPE "Release")
-endif()
-
 if(CMAKE_BUILD_TYPE STREQUAL "Release")
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS_RELEASE}")
 elseif(CMAKE_BUILD_TYPE STREQUAL "Debug")
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS_DEBUG}")
 endif()
+
+message(STATUS "CMAKE_CONFIGURATION_TYPES:= ${CMAKE_CONFIGURATION_TYPES}")
+message(STATUS "CMAKE_C_FLAGS_RELEASE:= ${CMAKE_C_FLAGS_RELEASE}")
+message(STATUS "CMAKE_C_FLAGS_DEBUG:= ${CMAKE_C_FLAGS_DEBUG}")
+message(STATUS "CMAKE_C_FLAGS:= ${CMAKE_C_FLAGS}")
+message(STATUS "CMAKE_BUILD_TYPE:= ${CMAKE_BUILD_TYPE}")
 
 include_directories("${PROJECT_SOURCE_DIR}/include")
 include_directories("${PROJECT_SOURCE_DIR}/zbar/decoder")
