@@ -73,12 +73,21 @@
 # define relocate(pathname) (pathname)
 #endif
 
-///////////////////////// 삭제 / DELETE / УДАЛИТЬ ///////////////////////
-///* Get LIBDIR.  */
-//#ifndef LIBDIR
-//# include "configmake.h"
-//#endif
-////////////////////////////////////////////////////////////////////////////////
+// Start windows + android fix
+#ifdef LIBDIR
+    #undef LIBDIR
+    #define LIBDIR ""
+#else
+    #define LIBDIR ""
+#endif
+
+#ifdef HAVE_WORKING_O_NOFOLLOW
+    #undef HAVE_WORKING_O_NOFOLLOW
+    #define HAVE_WORKING_O_NOFOLLOW 0
+#else
+    #define HAVE_WORKING_O_NOFOLLOW 0
+#endif
+// End windows + android fix
 
 /* Define O_NOFOLLOW to 0 on platforms where it does not exist.  */
 #ifndef O_NOFOLLOW

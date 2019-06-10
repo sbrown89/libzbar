@@ -20,24 +20,15 @@
 #ifndef _LOCALCHARSET_H
 #define _LOCALCHARSET_H
 
-///////////////////////// 삭제 / DELETE / УДАЛИТЬ ///////////////////////
-//#if @HAVE_VISIBILITY@ && BUILDING_LIBCHARSET
-//#define LIBCHARSET_DLL_EXPORTED __attribute__((__visibility__("default")))
-//#else
-//#define LIBCHARSET_DLL_EXPORTED
-//#endif
-///////////////////////// 추가 / ADD / ДОВАВЛЯТЬ //////////////////////
-#ifdef BUILDING_LIBCHARSET
-#define LIBCHARSET_DLL_EXPORTED
-//#define LIBCHARSET_DLL_EXPORTED __declspec(dllexport)
-#elif USING_STATIC_LIBICONV
-#define LIBCHARSET_DLL_EXPORTED
+// Start windows + android fix
+// Remove all dll + static build/export options. This will be built into a private static lib.
+#ifdef LIBCHARSET_DLL_EXPORTED
+    #undef LIBCHARSET_DLL_EXPORTED
+    #define LIBCHARSET_DLL_EXPORTED
 #else
-#define LIBCHARSET_DLL_EXPORTED
-//#define LIBCHARSET_DLL_EXPORTED __declspec(dllimport)
+    #define LIBCHARSET_DLL_EXPORTED
 #endif
-////////////////////////////////////////////////////////////////////////////////
-
+// End windows + android fix
 
 #ifdef __cplusplus
 extern "C" {

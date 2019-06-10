@@ -26,10 +26,11 @@
 /* Define to 1 if // is a file system root distinct from /. */
 #undef DOUBLE_SLASH_IS_DISTINCT_ROOT
 
-///////////////////////// 삭제 / DELETE / УДАЛИТЬ ///////////////////////
-///* Define as good substitute value for EILSEQ. */
+// Start windows + android fix
+///* Define as good substitute value for EILSEQ. */ dont use on win or android
 //#undef EILSEQ
-////////////////////////////////////////////////////////////////////////////////
+// End windows + android fix
+
 
 /* Define to 1 to enable a few rarely used encodings. */
 #undef ENABLE_EXTRA

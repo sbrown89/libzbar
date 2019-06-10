@@ -41,9 +41,9 @@ set(HEADERS_CONFIG
     config.h
 )
 
-if(WIN32)
+if(WIN32 OR ANDROID)
     add_subdirectory("libiconv-win")
-endif(WIN32)
+endif(WIN32 OR ANDROID)
 
 add_library(${LCONFIG} STATIC ${SOURCES_CONFIG} ${HEADERS_CONFIG})
 add_library(${LZBAR} SHARED ${SOURCES} ${HEADERS})
@@ -51,9 +51,7 @@ add_library(${LZBAR} SHARED ${SOURCES} ${HEADERS})
 set(C_HEADERS "")
 if(UNIX)
     set(C_HEADERS "/usr/include")
-endif(UNIX)
-
-if(WIN32)
+elseif(WIN32)
     file(TO_CMAKE_PATH "$ENV{ProgramFiles}" _progFilePath)
     include_directories("${_progFilePath}/Windows Kits/10/Include/${CMAKE_VS_WINDOWS_TARGET_PLATFORM_VERSION}/ucrt")
     include_directories("${PROJECT_SOURCE_DIR}/zbar/win-include")
@@ -61,7 +59,7 @@ if(WIN32)
     
     target_compile_definitions(${LCONFIG} PUBLIC LIB_ZBAR_BUILD)
     target_compile_definitions(${LZBAR} PUBLIC LIB_ZBAR_BUILD)
-endif(WIN32)
+endif()
 
 find_file(HAVE_DLFCN_F               "dlfcn.h" "${C_HEADERS}")
 find_file(HAVE_FCNTL_F               "fcntl.h" "${C_HEADERS}")

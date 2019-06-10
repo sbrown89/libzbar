@@ -243,15 +243,13 @@ invalid:
   return (iconv_t)(-1);
 }
 
-///////////////////////// 삭제 / DELETE / УДАЛИТЬ ///////////////////////
-//size_t iconv (iconv_t icd,
-//              ICONV_CONST char* * inbuf, size_t *inbytesleft,
-//              char* * outbuf, size_t *outbytesleft)
-///////////////////////// 추가 / ADD / ДОВАВЛЯТЬ //////////////////////
+// Start windows + android fix
+// Remove ICONV_CONST and replace with const char
 size_t iconv (iconv_t icd,
               const char* * inbuf, size_t *inbytesleft,
               char* * outbuf, size_t *outbytesleft)
-////////////////////////////////////////////////////////////////////////////////
+// End windows + android fix
+
 {
   conv_t cd = (conv_t) icd;
   if (inbuf == NULL || *inbuf == NULL)
