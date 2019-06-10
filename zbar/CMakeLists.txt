@@ -41,9 +41,9 @@ set(HEADERS_CONFIG
     config.h
 )
 
-if(WIN32 OR ANDROID)
+if(WIN32 OR ANDROID OR APPLE)
     add_subdirectory("libiconv-win")
-endif(WIN32 OR ANDROID)
+endif()
 
 add_library(${LCONFIG} STATIC ${SOURCES_CONFIG} ${HEADERS_CONFIG})
 add_library(${LZBAR} SHARED ${SOURCES} ${HEADERS})
@@ -59,6 +59,9 @@ elseif(WIN32)
     
     target_compile_definitions(${LCONFIG} PUBLIC LIB_ZBAR_BUILD)
     target_compile_definitions(${LZBAR} PUBLIC LIB_ZBAR_BUILD)
+elseif(APPLE)
+    #  xcrun --show-sdk-path
+    set(C_HEADERS "/Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk/usr/include")
 endif()
 
 find_file(HAVE_DLFCN_F               "dlfcn.h" "${C_HEADERS}")
