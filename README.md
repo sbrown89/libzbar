@@ -24,7 +24,7 @@ Open VS 20xx Developer Command Prompt. For the most part the same arguments can 
 cmake -G Ninja "-DANDROID_ABI=x86" "-DCMAKE_INSTALL_PREFIX=C:/lib/libzbar-android-api-26" "-DCMAKE_BUILD_TYPE=Release" "-DANDROID_NDK=C:\Users\brown\AppData\Local\Android\Sdk\ndk-bundle" "-DCMAKE_TOOLCHAIN_FILE=C:\Users\brown\AppData\Local\Android\Sdk\ndk-bundle\build\cmake\android.toolchain.cmake" "-DANDROID_NATIVE_API_LEVEL=android-26" "-DBUILD_SHARED_LIBS=ON" .. <br />
 
 cmake --build . --config Release -- -j4 <br />
-OR
+OR <br />
 ninja build <br />
 ninja install <br />
 
