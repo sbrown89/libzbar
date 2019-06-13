@@ -28,6 +28,19 @@ OR <br />
 ninja build <br />
 ninja install <br />
 
+# macOS
+mkdir build; <br />
+cd buil; <br />
+cmake .. <br />
+make install <br />
+
+# iOS
+You should have xcode and command line tools installed. Do it the "Apple" way and don't use homebrew stuff ... make your life much easier. <br />
+cmake -G Xcode "-DCMAKE_INSTALL_PREFIX=~/lib/libzbar" "-DCMAKE_BUILD_TYPE=Release" .. <br />
+
+xcodebuild -list -project libzbar.xcodeproj /* Optional to show info about the build*/ <br />
+xcodebuild -configuration Release -scheme install <br />
+
 # LEGAL NOTE: 
 ## Suggested use, NOT ACTUAL  LEGAL ADVICE
 On Windows and Android this will statically build and link the libiconv library.
