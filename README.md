@@ -43,12 +43,11 @@ cmake -G Xcode "-DCMAKE_INSTALL_PREFIX=~/lib/libzbar-ios-sim" "-DCMAKE_BUILD_TYP
 xcodebuild -list -project libzbar.xcodeproj /* Optional to show info about the build*/ <br />
 xcodebuild -configuration Release -scheme install <br />
 
-# LEGAL NOTE: 
-## Suggested use, NOT ACTUAL  LEGAL ADVICE
+## LEGAL: 
 On Windows, Android, and Apple this will statically build and link the libiconv library.
 For non-opensource / proprietary code, by dynamically linking to the final lib (libzbar), you will remain LGPL compliant. This, the original ZBar codebase and libiconv are released under the LGPL license.<br />
 <br />
-You should review the LGPL legal doc if unsure of use.
+You should review the LGPL legal doc to ensure proper use.
 
 
 ## Original Sources
