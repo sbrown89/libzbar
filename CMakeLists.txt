@@ -65,7 +65,7 @@ else()
     set(LZBAR       "zbar")
 endif()
 
-if(WIN32 OR ANDROID OR APPLE)
+if(WIN32 OR ANDROID OR APPLE OR IOS)
     include_directories("${PROJECT_SOURCE_DIR}/zbar/libiconv-win/include")
 endif()
 
