@@ -46,6 +46,11 @@ if(WIN32 OR ANDROID OR APPLE)
 endif()
 
 add_library(${LCONFIG} STATIC ${SOURCES_CONFIG} ${HEADERS_CONFIG})
+
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+    set(LZBAR "${LZBAR}d")
+endif(CMAKE_BUILD_TYPE STREQUAL "Debug")
+
 add_library(${LZBAR} SHARED ${SOURCES} ${HEADERS})
 
 set(C_HEADERS "")
