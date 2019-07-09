@@ -16,8 +16,7 @@ Open VS 20xx Developer Command Prompt <br />
 mkdir build; <br />
 cd buil; <br />
 cmake -A x64 "-DCMAKE_INSTALL_PREFIX=C:/lib/libzbar" "-DCMAKE_BUILD_TYPE=Release" .. <br />
-msbuild.exe /p:Configuration=Release ALL_BUILD.vcxproj <br />
-msbuild.exe INSTALL.vcxproj <br />
+cmake --build . --config Release --target INSTALL <br />
 
 # Android
 Open VS 20xx Developer Command Prompt. For the most part the same arguments can be used to compile against the Android NDK on Linux. You will need to adapt for your environment. Im using the Ninja generator provided with the NDK.<br />
