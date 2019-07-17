@@ -37,10 +37,12 @@ make install <br />
 # iOS
 You should have xcode and command line tools installed. Do it the "Apple" way and don't use homebrew stuff ... make your life much easier. <br />
 <br />
-cmake -G Xcode "-DCMAKE_INSTALL_PREFIX=~/lib/libzbar-ios-sim" "-DCMAKE_BUILD_TYPE=Release" "-DIOS_ARCH=x86_64" "-DIPHONEOS_DEPLOYMENT_TARGET=iOS 12.2" "-DCMAKE_TOOLCHAIN_FILE=/Users/brown/build/libzbar-master/platforms/ios/cmake/Toolchains/Toolchain-iPhoneSimulator_Xcode.cmake" .. <br />
+cmake -G Xcode "-DCMAKE_INSTALL_PREFIX=~/lib/libzbar-ios" "-DCMAKE_BUILD_TYPE=Release" "-DIOS_ARCH=arm64" "-DIPHONEOS_DEPLOYMENT_TARGET=12.0" "-DCMAKE_TOOLCHAIN_FILE=/Users/sbrown/bldsrc/libzbar-libzbar-0.11.2/platforms/ios/cmake/Toolchains/Toolchain-iPhoneOS_Xcode.cmake" .. <br />
 
 xcodebuild -list -project libzbar.xcodeproj /* Optional to show info about the build*/ <br />
 xcodebuild -configuration Release -scheme install <br />
+Or <br />
+Open project file in xcode to make additional changes <br />
 
 ## LEGAL: 
 On Windows, Android, and Apple this will statically build and link the libiconv library.
