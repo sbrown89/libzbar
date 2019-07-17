@@ -38,14 +38,6 @@ set (CMAKE_C_OSX_CURRENT_VERSION_FLAG "-current_version ")
 set (CMAKE_CXX_OSX_COMPATIBILITY_VERSION_FLAG "${CMAKE_C_OSX_COMPATIBILITY_VERSION_FLAG}")
 set (CMAKE_CXX_OSX_CURRENT_VERSION_FLAG "${CMAKE_C_OSX_CURRENT_VERSION_FLAG}")
 
-# Additional flags for dynamic framework
-if (APPLE_FRAMEWORK AND BUILD_SHARED_LIBS)
-  set (CMAKE_MODULE_LINKER_FLAGS "-rpath @executable_path/Frameworks -rpath @loader_path/Frameworks")
-  set (CMAKE_SHARED_LINKER_FLAGS "-rpath @executable_path/Frameworks -rpath @loader_path/Frameworks")
-  set (CMAKE_SHARED_LIBRARY_RUNTIME_C_FLAG 1)
-  set (CMAKE_INSTALL_NAME_DIR "@rpath")
-endif()
-
 # Hidden visibilty is required for cxx on iOS
 set (no_warn "-Wno-unused-function -Wno-overloaded-virtual")
 set (CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${no_warn}")

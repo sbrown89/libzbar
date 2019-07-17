@@ -86,10 +86,6 @@ endif()
 set(CMAKE_MACOSX_BUNDLE YES)
 set(CMAKE_XCODE_ATTRIBUTE_CODE_SIGNING_REQUIRED "NO")
 
-if(APPLE_FRAMEWORK AND NOT BUILD_SHARED_LIBS)
-  set(CMAKE_OSX_ARCHITECTURES "${IOS_ARCH}" CACHE INTERNAL "Build architecture for iOS" FORCE)
-endif()
-
 if(NOT DEFINED IPHONEOS_DEPLOYMENT_TARGET)
   if(NOT DEFINED ENV{IPHONEOS_DEPLOYMENT_TARGET})
     message(FATAL_ERROR "IPHONEOS_DEPLOYMENT_TARGET is not specified")
@@ -97,36 +93,11 @@ if(NOT DEFINED IPHONEOS_DEPLOYMENT_TARGET)
   set(IPHONEOS_DEPLOYMENT_TARGET "$ENV{IPHONEOS_DEPLOYMENT_TARGET}")
 endif()
 
-if(NOT __IN_TRY_COMPILE)
-  set(_xcodebuild_wrapper "${CMAKE_BINARY_DIR}/xcodebuild_wrapper")
-  if(NOT EXISTS "${_xcodebuild_wrapper}")
-    set(_xcodebuild_wrapper_tmp "${CMAKE_BINARY_DIR}${CMAKE_FILES_DIRECTORY}/xcodebuild_wrapper")
-    if(NOT DEFINED CMAKE_MAKE_PROGRAM)  # empty since CMake 3.10
-      find_program(XCODEBUILD_PATH "xcodebuild")
-      if(NOT XCODEBUILD_PATH)
-        message(FATAL_ERROR "Specify CMAKE_MAKE_PROGRAM variable ('xcodebuild' absolute path)")
-      endif()
-      set(CMAKE_MAKE_PROGRAM "${XCODEBUILD_PATH}")
-    endif()
-    if(CMAKE_MAKE_PROGRAM STREQUAL _xcodebuild_wrapper)
-      message(FATAL_ERROR "Can't prepare xcodebuild_wrapper")
-    endif()
-    if(APPLE_FRAMEWORK AND BUILD_SHARED_LIBS)
-      set(XCODEBUILD_EXTRA_ARGS "${XCODEBUILD_EXTRA_ARGS} IPHONEOS_DEPLOYMENT_TARGET=${IPHONEOS_DEPLOYMENT_TARGET} -sdk ${CMAKE_OSX_SYSROOT}")
-    else()
-      set(XCODEBUILD_EXTRA_ARGS "${XCODEBUILD_EXTRA_ARGS} IPHONEOS_DEPLOYMENT_TARGET=${IPHONEOS_DEPLOYMENT_TARGET} ARCHS=${IOS_ARCH} -sdk ${CMAKE_OSX_SYSROOT}")
-    endif()
-    configure_file("${CMAKE_CURRENT_LIST_DIR}/xcodebuild_wrapper.in" "${_xcodebuild_wrapper_tmp}" @ONLY)
-    file(COPY "${_xcodebuild_wrapper_tmp}" DESTINATION ${CMAKE_BINARY_DIR} FILE_PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)
-  endif()
-  set(CMAKE_MAKE_PROGRAM "${_xcodebuild_wrapper}" CACHE INTERNAL "" FORCE)
-endif()
-
 # Standard settings
 set(CMAKE_SYSTEM_NAME iOS)
 
 # Apple Framework settings
-if(APPLE_FRAMEWORK AND BUILD_SHARED_LIBS)
+if(BUILD_SHARED_LIBS)
   set(CMAKE_SYSTEM_VERSION "${IPHONEOS_DEPLOYMENT_TARGET}")
   set(CMAKE_C_SIZEOF_DATA_PTR 4)
   set(CMAKE_CXX_SIZEOF_DATA_PTR 4)
@@ -146,19 +117,10 @@ endif()
 # Include extra modules for the iOS platform files
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/platforms/ios/cmake/Modules")
 
-# Force the compilers to clang for iOS
-include(CMakeForceCompiler)
-#CMAKE_FORCE_C_COMPILER (clang GNU)
-#CMAKE_FORCE_CXX_COMPILER (clang++ GNU)
-
 set(CMAKE_C_HAS_ISYSROOT 1)
 set(CMAKE_CXX_HAS_ISYSROOT 1)
 set(CMAKE_C_COMPILER_ABI ELF)
 set(CMAKE_CXX_COMPILER_ABI ELF)
-
-# Skip the platform compiler checks for cross compiling
-set(CMAKE_CXX_COMPILER_WORKS TRUE)
-set(CMAKE_C_COMPILER_WORKS TRUE)
 
 # Search for programs in the build host directories
 set(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM ONLY)
