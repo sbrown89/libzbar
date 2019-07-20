@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.3)
-project("libzbar" VERSION 0.11.2 DESCRIPTION "Complete cross-platform ZBar cmake port")
+project("libzbar" VERSION 0.11.3 DESCRIPTION "Complete cross-platform ZBar cmake port")
 if(NOT CMAKE_INSTALL_PREFIX)
     set(CMAKE_INSTALL_PREFIX "${PROJECT_SOURCE_DIR}/bin")
 endif()
