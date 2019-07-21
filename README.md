@@ -14,7 +14,7 @@ make install <br />
 Open VS 20xx Developer Command Prompt <br />
 <br />
 mkdir build; <br />
-cd buil; <br />
+cd build; <br />
 cmake -A x64 "-DCMAKE_INSTALL_PREFIX=C:/lib/libzbar" "-DCMAKE_BUILD_TYPE=Release" .. <br />
 cmake --build . --config Release --target INSTALL <br />
 
