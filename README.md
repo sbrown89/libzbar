@@ -45,7 +45,7 @@ Or <br />
 Open project file in xcode to make additional changes <br />
 
 ## LEGAL: 
-On Windows, Android, and Apple this will statically build and link the libiconv library.
+On Windows, Android, Apple, and iOS this will statically build and link the libiconv library.
 For non-opensource / proprietary code, by dynamically linking to the final lib (libzbar), you will remain LGPL compliant. This, the original ZBar codebase and libiconv are released under the LGPL license.<br />
 <br />
 You should review the LGPL legal doc to ensure proper use.
