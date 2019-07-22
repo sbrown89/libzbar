@@ -1,5 +1,5 @@
 # libzbar
-Complete Cmake Cross-Platform ZBar port <br />
+Complete CMake Cross-Platform ZBar port <br />
 Uses CMake as the build system <br />
 <br />
 I have removed/moved files that don’t directly contribute to the locating and decoding of barcodes/qrcodes. They are located in the directory notused. If you would like their functionality .. then add them to the compilation yourself. :wink:
