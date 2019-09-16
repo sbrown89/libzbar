@@ -4,8 +4,8 @@
 # @date:    8/22/2019
 
 # Default values, change for your needs, will cli args at some point
-export ANDROID_NDK_HOME=~/bldsrc/android-ndk-r19c;
-ANDROID_API=22;
+export ANDROID_NDK_HOME=$(readlink -f ~/Android/Sdk/ndk/20.*.*);
+ANDROID_API=24;
 ANDROID_ABI="";
 CMAKE_INSTALL_PREFIX="";
 NINJA_BIN="";
@@ -104,19 +104,19 @@ for arch in "x86_64" "x86" "arm64" "arm32"; do
     # If needed set api level by arch
     case $arch in
         x86)
-            ANDROID_API=22;
+            ANDROID_API=24;
             ANDROID_ABI="x86";
             ;;
         arm64)
-            ANDROID_API=22;
+            ANDROID_API=24;
             ANDROID_ABI="arm64-v8a";
             ;;
         arm32)
-            ANDROID_API=22;
+            ANDROID_API=24;
             ANDROID_ABI="armeabi-v7a";
             ;;
         x86_64)
-            ANDROID_API=22;
+            ANDROID_API=24;
             ANDROID_ABI="x86_64";
             ;;
     esac
