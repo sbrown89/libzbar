@@ -187,7 +187,11 @@ foreach(CONFIG_OPT
     
 endforeach()
 
-target_link_libraries(${LZBAR} ${LQRCODE} ${LDECODER} ${LCONFIG})
+if(APPLE)
+    target_link_libraries(${LZBAR} ${LQRCODE} ${LDECODER} ${LCONFIG} "-fembed-bitcode")
+else()
+    target_link_libraries(${LZBAR} ${LQRCODE} ${LDECODER} ${LCONFIG})
+endif()
 
 if(WIN32)
     if(${CMAKE_GENERATOR_PLATFORM} STREQUAL "x64")

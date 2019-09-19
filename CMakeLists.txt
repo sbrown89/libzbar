@@ -25,7 +25,7 @@ elseif(UNIX OR ANDROID)
 elseif(APPLE)
     set(CMAKE_C_COMPILER gcc)
     set(CMAKE_CXX_COMPILER g++)
-    set(CMAKE_C_FLAGS_RELEASE "-O3 -fPIC -w")
+    set(CMAKE_C_FLAGS_RELEASE "-O3 -fPIC -w -fembed-bitcode")
     set(CMAKE_C_FLAGS_DEBUG "-Og -fPIC -w")
 endif()
 
