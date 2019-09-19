@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.3)
-project("libzbar" VERSION 0.11.3 DESCRIPTION "Complete cross-platform ZBar cmake port")
+project("libzbar" VERSION 0.11.5 DESCRIPTION "Complete cross-platform ZBar cmake port")
 if(NOT CMAKE_INSTALL_PREFIX)
     set(CMAKE_INSTALL_PREFIX "${PROJECT_SOURCE_DIR}/bin")
 endif()
@@ -68,9 +68,15 @@ endif()
 
 if(IOS)
     if(BUILD_SHARED_LIBS)
-        set(COMPAT_VERSION "-lSystem -compatibility_version ${PROJECT_VERSION} -current_version ${PROJECT_VERSION}")
-        set(CMAKE_MODULE_LINKER_FLAGS "-install_name @executable_path/Frameworks/lib${LZBAR}.dylib ${COMPAT_VERSION}")
-        set(CMAKE_SHARED_LINKER_FLAGS "-install_name @executable_path/Frameworks/lib${LZBAR}.dylib ${COMPAT_VERSION}")
+        set(COMPAT_VERSION 
+            "-lSystem -compatibility_version ${PROJECT_VERSION} -current_version ${PROJECT_VERSION}"
+            )
+        set(CMAKE_MODULE_LINKER_FLAGS
+            "-install_name @executable_path/Frameworks/zbar.framework/zbar ${COMPAT_VERSION}"
+            )
+        set(CMAKE_SHARED_LINKER_FLAGS
+            "-install_name @executable_path/Frameworks/zbar.framework/zbar ${COMPAT_VERSION}"
+            )
         set (CMAKE_SHARED_LIBRARY_RUNTIME_C_FLAG 1)
         set (CMAKE_INSTALL_NAME_DIR "@executable_path")
     endif()
