@@ -68,9 +68,15 @@ endif()
 
 if(IOS)
     if(BUILD_SHARED_LIBS)
-        set(COMPAT_VERSION "-lSystem -compatibility_version ${PROJECT_VERSION} -current_version ${PROJECT_VERSION}")
-        set(CMAKE_MODULE_LINKER_FLAGS "-install_name @executable_path/Frameworks/lib${LZBAR}.dylib ${COMPAT_VERSION}")
-        set(CMAKE_SHARED_LINKER_FLAGS "-install_name @executable_path/Frameworks/lib${LZBAR}.dylib ${COMPAT_VERSION}")
+        set(COMPAT_VERSION 
+            "-lSystem -compatibility_version ${PROJECT_VERSION} -current_version ${PROJECT_VERSION}"
+            )
+        set(CMAKE_MODULE_LINKER_FLAGS
+            "-install_name @executable_path/Frameworks/zbar.framework/zbar ${COMPAT_VERSION}"
+            )
+        set(CMAKE_SHARED_LINKER_FLAGS
+            "-install_name @executable_path/Frameworks/zbar.framework/zbar ${COMPAT_VERSION}"
+            )
         set (CMAKE_SHARED_LIBRARY_RUNTIME_C_FLAG 1)
         set (CMAKE_INSTALL_NAME_DIR "@executable_path")
     endif()
