@@ -15,8 +15,8 @@ Open VS 20xx Developer Command Prompt <br />
 <br />
 mkdir build; <br />
 cd build; <br />
-cmake -A x64 \<br />
--DCMAKE_INSTALL_PREFIX=C:/lib/libzbar \<br />
+cmake -A x64 \ <br />
+-DCMAKE_INSTALL_PREFIX=C:/lib/libzbar \ <br />
 -DCMAKE_BUILD_TYPE=Release ..;
 <br />
 <br />
@@ -29,13 +29,13 @@ cmake --build . --config Release --target INSTALL <br />
 ## Windows 10+ MSVC
 Open VS 20xx Developer Command Prompt. For the most part the same arguments can be used to compile against the Android NDK on Linux. You will need to adapt for your environment. Im using the Ninja generator provided with the NDK.<br />
 <br />
-cmake -G Ninja \<br />
--DANDROID_ABI=x86 \<br />
--DCMAKE_INSTALL_PREFIX=C:/lib/libzbar-android \<br /> 
--DCMAKE_BUILD_TYPE=Release \<br />
--DANDROID_NDK=C:\Users\brown\AppData\Local\Android\Sdk\ndk-bundle \<br />
--DCMAKE_TOOLCHAIN_FILE=C:\Users\brown\AppData\Local\Android\Sdk\ndk-bundle\build\cmake\android.toolchain.cmake \<br />
--DANDROID_NATIVE_API_LEVEL=android-26 \<br />
+cmake -G Ninja \ <br />
+-DANDROID_ABI=x86 \ <br />
+-DCMAKE_INSTALL_PREFIX=C:/lib/libzbar-android \ <br /> 
+-DCMAKE_BUILD_TYPE=Release \ <br />
+-DANDROID_NDK=C:\Users\brown\AppData\Local\Android\Sdk\ndk-bundle \ <br />
+-DCMAKE_TOOLCHAIN_FILE=C:\Users\brown\AppData\Local\Android\Sdk\ndk-bundle\build\cmake\android.toolchain.cmake \ <br />
+-DANDROID_NATIVE_API_LEVEL=android-26 \ <br />
 -DBUILD_SHARED_LIBS=ON ..;
 <br />
 <br />
@@ -53,11 +53,11 @@ make install <br />
 # iOS
 You should have xcode and command line tools installed. Do it the "Apple" way and don't use homebrew stuff ... make your life much easier. <br />
 <br />
-cmake -G Xcode \<br />
--DCMAKE_INSTALL_PREFIX=~/lib/libzbar-ios \<br />
--DCMAKE_BUILD_TYPE=Release \<br />
--DIOS_ARCH=arm64 \<br />
--DIPHONEOS_DEPLOYMENT_TARGET=12.4 \<br />
+cmake -G Xcode \ <br />
+-DCMAKE_INSTALL_PREFIX=~/lib/libzbar-ios \ <br />
+-DCMAKE_BUILD_TYPE=Release \ <br />
+-DIOS_ARCH=arm64 \ <br />
+-DIPHONEOS_DEPLOYMENT_TARGET=12.4 \ <br />
 -DCMAKE_TOOLCHAIN_FILE=/bldsrc/libzbar/platforms/ios/cmake/Toolchains/Toolchain-iPhoneOS_Xcode.cmake ..;
 <br />
 <br />
