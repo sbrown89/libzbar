@@ -46,19 +46,25 @@ ninja install <br />
 
 # macOS
 mkdir build; <br />
-cd buil; <br />
+cd build; <br />
 cmake .. <br />
-make install <br />
+make -j$(sysctl -n hw.ncpu) install <br />
 
 # iOS
-You should have xcode and command line tools installed. Do it the "Apple" way and don't use homebrew stuff ... make your life much easier. <br />
+You should have xcode and command line tools installed. Do it the "Apple" way and don't use homebrew. If you use homebrew the results are untested.
+
+## Catalina and above, must use new build system:
+After running the cmake command, if your build system is legacy build system, open the xcode project and switch build system to new build system in file->project settings. If you don't it will error out. <br />
+
+mkdir build; <br />
+cd build; <br />
 <br />
 cmake -G Xcode \ <br />
 -DCMAKE_INSTALL_PREFIX=~/lib/libzbar-ios \ <br />
 -DCMAKE_BUILD_TYPE=Release \ <br />
 -DIOS_ARCH=arm64 \ <br />
--DIPHONEOS_DEPLOYMENT_TARGET=12.4 \ <br />
--DCMAKE_TOOLCHAIN_FILE=/bldsrc/libzbar/platforms/ios/cmake/Toolchains/Toolchain-iPhoneOS_Xcode.cmake ..;
+-DIPHONEOS_DEPLOYMENT_TARGET=13.2 \ <br />
+-DCMAKE_TOOLCHAIN_FILE=../platforms/ios/cmake/Toolchains/Toolchain-iPhoneOS_Xcode.cmake ..;
 <br />
 <br />
 xcodebuild -list -project libzbar.xcodeproj /* Optional to show info about the build*/ <br />
