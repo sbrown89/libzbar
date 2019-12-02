@@ -64,10 +64,14 @@ cmake -G Xcode \ <br />
 -DCMAKE_TOOLCHAIN_FILE=../platforms/ios/cmake/Toolchains/Toolchain-iPhoneOS_Xcode.cmake ..;
 <br />
 <br />
+
+## macOS Catalina or later
+xcodebuild -configuration Release -scheme install -arch arm64 -sdk iphoneos <br />
+[Catelina iOS build bug](https://github.com/sbrown89/libzbar/issues/4)
+
+## macOS Mojave or earlier
 xcodebuild -list -project libzbar.xcodeproj /* Optional to show info about the build*/ <br />
 xcodebuild -configuration Release -scheme install <br />
-Or <br />
-Open project file in xcode to make additional changes <br />
 
 ## LEGAL: 
 On Windows, Android, Apple, and iOS this will statically build and link the libiconv library.
