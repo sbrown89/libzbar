@@ -3,8 +3,16 @@
 # @author:  Stephen Brown
 # @date:    8/22/2019
 
+if [[ -z $ANDROID_NDK_HOME && -z $1 ]]; then
+    echo "ANDROID_NDK_HOME environment variable must be set or passed in as arg. Ex: ~/Android/Sdk/ndk/20.*.*";
+    exit 1;
+fi
+
+if [[ ! -z $1 ]]; then
+    export ANDROID_NDK_HOME=$1
+fi
+
 # Default values, change for your needs, will cli args at some point
-export ANDROID_NDK_HOME=$(readlink -f ~/Android/Sdk/ndk/20.*.*);
 ANDROID_API=24;
 ANDROID_ABI="";
 CMAKE_INSTALL_PREFIX="";
